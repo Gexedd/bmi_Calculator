@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Widget de una tarjeta reutilizable, recibe parametros y uno de ellos es un widget
 class ReusableCard extends StatelessWidget {
   ReusableCard({required this.colour, this.cardChild, this.onPress}); //Constructor y con nombramiento especifico del parametro colour
 
@@ -10,9 +11,9 @@ class ReusableCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPress,
+      onTap: onPress, //Parametro del onPress
       child: Container(
-        child: cardChild,
+        child: cardChild, //recibe un wdiget tipo cardChild (esto es un widget dentro del widget)
         margin: EdgeInsets.all(12),
         decoration: BoxDecoration(
           color:
