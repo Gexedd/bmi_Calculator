@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+//Creacion de una tarjeta reutilizable en DART
 //Widget de una tarjeta reutilizable, recibe parametros y uno de ellos es un widget
 class ReusableCard extends StatelessWidget {
   ReusableCard({required this.colour, this.cardChild, this.onPress}); //Constructor y con nombramiento especifico del parametro colour

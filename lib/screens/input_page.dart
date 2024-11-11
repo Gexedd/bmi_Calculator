@@ -1,9 +1,12 @@
-import 'package:bmi_calculator/input_page.dart';
+import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/components/icon_content.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
+import 'package:bmi_calculator/components/round_icon_button.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/icon_content.dart';
-import 'package:bmi_calculator/reusable_card.dart';
-import 'constants.dart';
+import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/calculator_brain.dart';
 
 //Creacion de enums gender
 enum Gender { male, female }
@@ -229,11 +232,24 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            margin: EdgeInsets.only(top: 5),
-            width: double.infinity,
-            height: kBottomContainerHeight,
+          BottomButton(
+            onTap: () {
+              CalculatorBrain calc = CalculatorBrain(
+                  height: height,
+                  weight: weigth); //Se inicia el CalculatorBrain object
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(
+                    bmiResult: calc.calculateBMI(),
+                    resultText: calc.getResult(),
+                    interpretation: calc.getInterpretation(),
+                  ),
+                ),
+              );
+            },
+            buttonTitle: 'CALCULATE',
           )
         ],
       ),
@@ -241,27 +257,6 @@ class _InputPageState extends State<InputPage> {
         onPressed: () {},
         child: Icon(Icons.add),
       ),*/
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton(
-      {required this.icon,
-      required this.onPressed}); //Este es el constructor y se le asigna la varible icono
-
-  final IconData icon; //Variable icono
-  final Function() onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(icon),
-      elevation: 20.0,
-      constraints: BoxConstraints.tightFor(width: 45, height: 45),
-      shape: CircleBorder(),
-      fillColor: Color(0xff4c4f5e),
-      onPressed: onPressed,
     );
   }
 }
